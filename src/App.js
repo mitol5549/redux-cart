@@ -8,8 +8,6 @@ import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
 
-let isInitial = true;
-
 function App() {
   const dispatch = useDispatch();
 
@@ -22,12 +20,9 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
     }
-
-    dispatch(sendCartData(cart));
   }, [cart, dispatch]);
 
   return (
